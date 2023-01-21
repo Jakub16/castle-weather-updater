@@ -1,6 +1,6 @@
 package com.castle.weatherupdater.repeater.abstractions;
 
 @FunctionalInterface
-public interface IExceptionHandler {
+public interface IHandleException {
     void handleException(Exception exception);
 }
