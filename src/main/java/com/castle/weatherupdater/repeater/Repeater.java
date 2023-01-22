@@ -1,11 +1,14 @@
 package com.castle.weatherupdater.repeater;
 
+import lombok.NoArgsConstructor;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@NoArgsConstructor
 public class Repeater {
     private List<Task> tasks = new ArrayList<>();
     private LocalDateTime startTime = LocalDateTime.now();

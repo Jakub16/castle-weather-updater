@@ -1,28 +1,30 @@
 package com.castle.weatherupdater.mappers;
 import com.castle.data.model.Weather;
 import com.castle.weatherclient.contract.WeatherDto;
+import org.springframework.stereotype.Component;
 
-public class WeatherMapper implements IMapper<WeatherDto, Weather> {
+@Component
+public class WeatherMapper implements IMapEntities<WeatherDto, Weather, WeatherDescriptionMapper> {
 
     @Override
     public Weather map(WeatherDto weatherDto) {
-        return map(new Weather(), weatherDto);
+        return map(new Weather(), weatherDto, new WeatherDescriptionMapper());
     }
 
     @Override
-    public Weather map(Weather weather, WeatherDto weatherDto) {
-//        weather.setCloudiness(weatherDto.getCloudiness());
-//        weather.setHumidity(weatherDto.getHumidity());
-//        weather.setLongitude(weatherDto.getLongitude());
-//        weather.setLongitude(weatherDto.getLongitude());
-//        weather.setHumidity(weatherDto.getHumidity());
-//        weather.setTemperature(weatherDto.getTemperature());
-//        weather.setPerceivedTemperature(weatherDto.getPerceivedTemperature());
-//        weather.setPressure(weatherDto.getPressure());
-//        weather.setSunrise(weatherDto.getSunrise());
-//        weather.setSunset(weatherDto.getSunset());
-//        weather.setUnixTime(weatherDto.getUnixTime());
-//        weather.setWindSpeed(weatherDto.getWindSpeed());
+    public Weather map(Weather weather, WeatherDto weatherDto, WeatherDescriptionMapper weatherDescriptionMapper) {
+        weather.setLatitude(weatherDto.getLatitude());
+        weather.setLongitude(weatherDto.getLongitude());
+        weather.setUnixTime(weatherDto.getCurrentWeatherDto().getUnixTime());
+        weather.setSunrise(weatherDto.getCurrentWeatherDto().getSunrise());
+        weather.setSunset(weatherDto.getCurrentWeatherDto().getSunset());
+        weather.setTemperature(weatherDto.getCurrentWeatherDto().getTemperature());
+        weather.setPerceivedTemperature(weatherDto.getCurrentWeatherDto().getPerceivedTemperature());
+        weather.setPressure(weatherDto.getCurrentWeatherDto().getPressure());
+        weather.setHumidity(weatherDto.getCurrentWeatherDto().getHumidity());
+        weather.setCloudiness(weatherDto.getCurrentWeatherDto().getCloudiness());
+        weather.setWindSpeed(weatherDto.getCurrentWeatherDto().getWindSpeed());
+        weather.setWeatherDescription(weatherDescriptionMapper.map(weatherDto.getCurrentWeatherDto().getWeatherDescriptionDto().get(0)));
 
         return weather;
     }

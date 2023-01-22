@@ -3,7 +3,9 @@ package com.castle.weatherupdater.repeater;
 import com.castle.weatherupdater.repeater.abstractions.IExecuteAction;
 import com.castle.weatherupdater.repeater.abstractions.IProvideActionOnCompletedTask;
 import com.castle.weatherupdater.repeater.abstractions.IHandleException;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 public class Task {
     private String name;
     private IProvideActionOnCompletedTask onCompletedTask = () -> {};
@@ -13,6 +15,9 @@ public class Task {
     private boolean isTerminated = false;
 
     public Task(IExecuteAction action) {
+        this.action = action;
+    }
+    public void setAction(IExecuteAction action) {
         this.action = action;
     }
 
