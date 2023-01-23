@@ -24,7 +24,7 @@ public class WeatherMapper implements IMapEntities<WeatherDto, Weather, WeatherD
         weather.setHumidity(weatherDto.getCurrentWeatherDto().getHumidity());
         weather.setCloudiness(weatherDto.getCurrentWeatherDto().getCloudiness());
         weather.setWindSpeed(weatherDto.getCurrentWeatherDto().getWindSpeed());
-        weather.setWeatherDescription(weatherDescriptionMapper.map(weatherDto.getCurrentWeatherDto().getWeatherDescriptionDto().get(0)));
+        //weather.setWeatherDescription(weatherDescriptionMapper.map(weatherDto.getCurrentWeatherDto().getWeatherDescriptionDto().get(0)));
 
         return weather;
     }

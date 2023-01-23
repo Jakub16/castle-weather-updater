@@ -29,7 +29,7 @@ public class DailyWeatherElementMapper implements IMapEntities<DailyWeatherEleme
         dailyWeatherElement.setMorningPerceivedTemperature(dailyWeatherElementDto.getDailyFeelsLikeDto().getMorningPerceivedTemperature());
         dailyWeatherElement.setPressure(dailyWeatherElementDto.getPressure());
         dailyWeatherElement.setHumidity(dailyWeatherElementDto.getHumidity());
-        dailyWeatherElement.setWeatherDescription(weatherDescriptionMapper.map(dailyWeatherElementDto.getWeatherDescription().get(0)));
+        //dailyWeatherElement.setWeatherDescription(weatherDescriptionMapper.map(dailyWeatherElementDto.getWeatherDescription().get(0)));
         dailyWeatherElement.setCloudiness(dailyWeatherElementDto.getCloudiness());
         dailyWeatherElement.setProbabilityOfPrecipitation(dailyWeatherElementDto.getProbabilityOfPrecipitation());
         dailyWeatherElement.setRainAmount(dailyWeatherElementDto.getRainAmount());

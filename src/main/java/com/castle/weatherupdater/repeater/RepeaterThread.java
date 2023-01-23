@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class RepeaterThread implements Runnable {
 
-    private final Repeater repeater; //remember to call getTaskExecution() when creating the repeater instance
+    private final Repeater repeater;
 
     @Override
     public void run() {

@@ -22,7 +22,7 @@ public class HourlyWeatherElementMapper implements IMapEntities<HourlyWeatherEle
         hourlyWeatherElement.setUvi(hourlyWeatherElementDto.getUvi());
         hourlyWeatherElement.setCloudiness(hourlyWeatherElementDto.getCloudiness());
         hourlyWeatherElement.setWindSpeed(hourlyWeatherElementDto.getWindSpeed());
-        hourlyWeatherElement.setWeatherDescription(weatherDescriptionMapper.map(hourlyWeatherElementDto.getWeatherDescription().get(0)));
+        //hourlyWeatherElement.setWeatherDescription(weatherDescriptionMapper.map(hourlyWeatherElementDto.getWeatherDescriptionDtos().get(0)));
 
         return hourlyWeatherElement;
     }

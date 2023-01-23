@@ -1,4 +1,4 @@
-package com.castle.weatherupdater.repeater;
+package com.castle.weatherupdater.repeater.abstractions;
 
 public interface IUpdateWeather {
     void updateCurrentWeather();
