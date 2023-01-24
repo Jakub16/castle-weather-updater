@@ -1,14 +1,13 @@
 package com.castle.weatherupdater.mappers;
 
-import com.castle.data.model.DailyWeather;
-import com.castle.data.model.HourlyWeather;
-import com.castle.data.model.Weather;
-import com.castle.weatherclient.contract.DailyWeatherDto;
-import com.castle.weatherclient.contract.HourlyWeatherDto;
-import com.castle.weatherclient.contract.WeatherDto;
+import com.castle.data.model.*;
+import com.castle.weatherclient.contract.*;
 
 public interface ICatalogMappers {
-    IMapEntities<DailyWeatherDto, DailyWeather, DailyWeatherElementMapper> getDailyWeatherMapper();
-    IMapEntities<HourlyWeatherDto, HourlyWeather, HourlyWeatherElementMapper> getHourlyWeatherMapper();
-    IMapEntities<WeatherDto, Weather, WeatherDescriptionMapper> getWeatherMapper();
+    IMapEntities<DailyWeatherDto, DailyWeather> getDailyWeatherMapper();
+    IMapEntities<DailyWeatherElementDto, DailyWeatherElement> getDailyWeatherElementMapper();
+    IMapEntities<HourlyWeatherDto, HourlyWeather> getHourlyWeatherMapper();
+    IMapEntities<HourlyWeatherElementDto, HourlyWeatherElement> getHourlyWeatherElementMapper();
+    IMapEntities<WeatherDto, Weather> getWeatherMapper();
+    IMapEntities<WeatherDescriptionDto, WeatherDescription> getWeatherDescriptionMapper();
 }

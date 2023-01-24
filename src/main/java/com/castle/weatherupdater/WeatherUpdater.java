@@ -2,6 +2,7 @@ package com.castle.weatherupdater;
 
 import com.castle.data.repositories.IDataRepository;
 import com.castle.weatherclient.IWeatherClient;
+import com.castle.weatherupdater.mappers.HourlyWeatherElementMapper;
 import com.castle.weatherupdater.mappers.ICatalogMappers;
 import com.castle.weatherupdater.repeater.abstractions.IUpdateWeather;
 import org.springframework.stereotype.Component;
@@ -22,37 +23,98 @@ public final class WeatherUpdater implements IUpdateWeather {
 
     @Override
     public void updateCurrentWeather() {
+        var weatherDto = weatherClient.getCurrentWeather();
+
+        var weatherDescription = catalogMapper
+                .getWeatherDescriptionMapper()
+                        .map(weatherDto.getCurrentWeatherDto().getWeatherDescriptionDto().get(0));
+        var weather = catalogMapper
+                .getWeatherMapper()
+                        .map(weatherDto);
+
+        weatherDescription.setWeather(weather);
 
         dataRepository
                 .getWeatherRepository()
-                .save(
-                        catalogMapper
-                                .getWeatherMapper()
-                                .map(weatherClient.getCurrentWeather())
-                );
+                .save(weather);
+
+        dataRepository
+                .getWeatherDescriptionRepository()
+                .save(weatherDescription);
+
     }
 
     @Override
     public void updateDailyWeather() {
+        var dailyWeatherDto = weatherClient
+                .getDailyWeather();
+
+        var dailyWeather = catalogMapper
+                .getDailyWeatherMapper()
+                        .map(dailyWeatherDto);
 
         dataRepository
                 .getDailyWeatherRepository()
-                .save(
-                        catalogMapper
-                                .getDailyWeatherMapper()
-                                .map(weatherClient.getDailyWeather())
-                );
+                        .save(dailyWeather);
+
+        dailyWeatherDto
+                .getDailyWeatherElementsDto()
+                        .forEach((dailyWeatherElementDto) -> {
+                            var dailyWeatherElement = catalogMapper
+                                    .getDailyWeatherElementMapper()
+                                    .map(dailyWeatherElementDto);
+
+                            var weatherDescription = catalogMapper
+                                    .getWeatherDescriptionMapper()
+                                    .map(dailyWeatherElementDto.getWeatherDescription().get(0));
+
+                            weatherDescription.setDailyWeatherElement(dailyWeatherElement);
+                            dailyWeatherElement.setDailyWeather(dailyWeather);
+
+                            dataRepository
+                                    .getDailyWeatherElementRepository()
+                                    .save(dailyWeatherElement);
+
+                            dataRepository
+                                    .getWeatherDescriptionRepository()
+                                    .save(weatherDescription);
+                        });
+
     }
 
     @Override
     public void updateHourlyWeather() {
+        var hourlyWeatherDto = weatherClient.getHourlyWeather();
+
+        var hourlyWeather = catalogMapper
+                .getHourlyWeatherMapper()
+                .map(hourlyWeatherDto);
 
         dataRepository
                 .getHourlyWeatherRepository()
-                .save(
-                        catalogMapper
-                                .getHourlyWeatherMapper()
-                                .map(weatherClient.getHourlyWeather())
-                );
+                .save(hourlyWeather);
+
+        hourlyWeatherDto
+                .getHourlyWeatherElementDtos()
+                    .forEach((hourlyWeatherElementDto) -> {
+                        var hourlyWeatherElement = catalogMapper
+                                .getHourlyWeatherElementMapper()
+                                .map(hourlyWeatherElementDto);
+
+                        var weatherDescription = catalogMapper
+                                .getWeatherDescriptionMapper()
+                                .map(hourlyWeatherElementDto.getWeatherDescriptionDtos().get(0));
+
+                        weatherDescription.setHourlyWeatherElement(hourlyWeatherElement);
+                        hourlyWeatherElement.setHourlyWeather(hourlyWeather);
+
+                        dataRepository
+                                .getHourlyWeatherElementRepository()
+                                .save(hourlyWeatherElement);
+
+                        dataRepository
+                                .getWeatherDescriptionRepository()
+                                .save(weatherDescription);
+                    });
     }
 }

@@ -5,23 +5,15 @@ import com.castle.weatherclient.contract.HourlyWeatherDto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HourlyWeatherMapper implements IMapEntities<HourlyWeatherDto, HourlyWeather, HourlyWeatherElementMapper> {
+public class HourlyWeatherMapper implements IMapEntities<HourlyWeatherDto, HourlyWeather> {
 
     @Override
     public HourlyWeather map(HourlyWeatherDto hourlyWeatherDto) {
-        return map(new HourlyWeather(), hourlyWeatherDto, new HourlyWeatherElementMapper());
+        return map(new HourlyWeather(), hourlyWeatherDto);
     }
 
     @Override
-    public HourlyWeather map(HourlyWeather hourlyWeather, HourlyWeatherDto hourlyWeatherDto, HourlyWeatherElementMapper hourlyWeatherElementMapper) {
-        hourlyWeather.setHourlyWeatherElements(
-                hourlyWeatherDto
-                        .getHourlyWeatherElementDtos()
-                        .stream()
-                        .map((hourlyWeatherElementDto) -> hourlyWeatherElementMapper.map(hourlyWeatherElementDto))
-                        .toList()
-        );
-
+    public HourlyWeather map(HourlyWeather hourlyWeather, HourlyWeatherDto hourlyWeatherDto) {
         return hourlyWeather;
     }
 }

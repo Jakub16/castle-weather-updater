@@ -5,23 +5,15 @@ import com.castle.weatherclient.contract.DailyWeatherDto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DailyWeatherMapper implements IMapEntities<DailyWeatherDto, DailyWeather, DailyWeatherElementMapper> {
+public class DailyWeatherMapper implements IMapEntities<DailyWeatherDto, DailyWeather> {
 
     @Override
     public DailyWeather map(DailyWeatherDto dailyWeatherDto) {
-        return map(new DailyWeather(), dailyWeatherDto, new DailyWeatherElementMapper());
+        return map(new DailyWeather(), dailyWeatherDto);
     }
 
     @Override
-    public DailyWeather map(DailyWeather dailyWeather, DailyWeatherDto dailyWeatherDto, DailyWeatherElementMapper dailyWeatherElementMapper) {
-        dailyWeather.setDailyWeatherElements(
-                dailyWeatherDto
-                        .getDailyWeatherElements()
-                        .stream()
-                        .map((dailyWeatherElementDto) -> dailyWeatherElementMapper.map(dailyWeatherElementDto))
-                        .toList()
-        );
-
+    public DailyWeather map(DailyWeather dailyWeather, DailyWeatherDto dailyWeatherDto) {
         return dailyWeather;
     }
 }

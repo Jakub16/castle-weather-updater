@@ -5,15 +5,15 @@ import com.castle.weatherclient.contract.HourlyWeatherElementDto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HourlyWeatherElementMapper implements IMapEntities<HourlyWeatherElementDto, HourlyWeatherElement, WeatherDescriptionMapper> {
+public class HourlyWeatherElementMapper implements IMapEntities<HourlyWeatherElementDto, HourlyWeatherElement> {
 
     @Override
     public HourlyWeatherElement map(HourlyWeatherElementDto hourlyWeatherElementDto) {
-        return map(new HourlyWeatherElement(), hourlyWeatherElementDto, new WeatherDescriptionMapper());
+        return map(new HourlyWeatherElement(), hourlyWeatherElementDto);
     }
 
     @Override
-    public HourlyWeatherElement map(HourlyWeatherElement hourlyWeatherElement, HourlyWeatherElementDto hourlyWeatherElementDto, WeatherDescriptionMapper weatherDescriptionMapper) {
+    public HourlyWeatherElement map(HourlyWeatherElement hourlyWeatherElement, HourlyWeatherElementDto hourlyWeatherElementDto) {
         hourlyWeatherElement.setUnixTime(hourlyWeatherElementDto.getUnixTime());
         hourlyWeatherElement.setTemperature(hourlyWeatherElementDto.getTemperature());
         hourlyWeatherElement.setPerceivedTemperature(hourlyWeatherElementDto.getTemperature());
@@ -22,7 +22,6 @@ public class HourlyWeatherElementMapper implements IMapEntities<HourlyWeatherEle
         hourlyWeatherElement.setUvi(hourlyWeatherElementDto.getUvi());
         hourlyWeatherElement.setCloudiness(hourlyWeatherElementDto.getCloudiness());
         hourlyWeatherElement.setWindSpeed(hourlyWeatherElementDto.getWindSpeed());
-        //hourlyWeatherElement.setWeatherDescription(weatherDescriptionMapper.map(hourlyWeatherElementDto.getWeatherDescriptionDtos().get(0)));
 
         return hourlyWeatherElement;
     }

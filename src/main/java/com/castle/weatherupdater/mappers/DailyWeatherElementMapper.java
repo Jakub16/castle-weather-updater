@@ -5,15 +5,15 @@ import com.castle.weatherclient.contract.DailyWeatherElementDto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DailyWeatherElementMapper implements IMapEntities<DailyWeatherElementDto, DailyWeatherElement, WeatherDescriptionMapper> {
+public class DailyWeatherElementMapper implements IMapEntities<DailyWeatherElementDto, DailyWeatherElement> {
 
     @Override
     public DailyWeatherElement map(DailyWeatherElementDto dailyWeatherElementDto) {
-        return map(new DailyWeatherElement(), dailyWeatherElementDto, new WeatherDescriptionMapper());
+        return map(new DailyWeatherElement(), dailyWeatherElementDto);
     }
 
     @Override
-    public DailyWeatherElement map(DailyWeatherElement dailyWeatherElement, DailyWeatherElementDto dailyWeatherElementDto, WeatherDescriptionMapper weatherDescriptionMapper) {
+    public DailyWeatherElement map(DailyWeatherElement dailyWeatherElement, DailyWeatherElementDto dailyWeatherElementDto) {
         dailyWeatherElement.setUnixTime(dailyWeatherElementDto.getUnixTime());
         dailyWeatherElement.setSunrise(dailyWeatherElementDto.getSunrise());
         dailyWeatherElement.setSunset(dailyWeatherElementDto.getSunset());
@@ -29,7 +29,6 @@ public class DailyWeatherElementMapper implements IMapEntities<DailyWeatherEleme
         dailyWeatherElement.setMorningPerceivedTemperature(dailyWeatherElementDto.getDailyFeelsLikeDto().getMorningPerceivedTemperature());
         dailyWeatherElement.setPressure(dailyWeatherElementDto.getPressure());
         dailyWeatherElement.setHumidity(dailyWeatherElementDto.getHumidity());
-        //dailyWeatherElement.setWeatherDescription(weatherDescriptionMapper.map(dailyWeatherElementDto.getWeatherDescription().get(0)));
         dailyWeatherElement.setCloudiness(dailyWeatherElementDto.getCloudiness());
         dailyWeatherElement.setProbabilityOfPrecipitation(dailyWeatherElementDto.getProbabilityOfPrecipitation());
         dailyWeatherElement.setRainAmount(dailyWeatherElementDto.getRainAmount());

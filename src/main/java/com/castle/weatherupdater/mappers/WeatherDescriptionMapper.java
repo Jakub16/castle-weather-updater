@@ -5,7 +5,7 @@ import com.castle.weatherclient.contract.WeatherDescriptionDto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class WeatherDescriptionMapper {
+public class WeatherDescriptionMapper implements IMapEntities<WeatherDescriptionDto, WeatherDescription> {
 
     public WeatherDescription map(WeatherDescriptionDto weatherDescriptionDto) {
         return map(new WeatherDescription(), weatherDescriptionDto);
