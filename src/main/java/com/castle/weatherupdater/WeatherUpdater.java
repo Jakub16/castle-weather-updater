@@ -1,8 +1,9 @@
 package com.castle.weatherupdater;
 
+import com.castle.data.model.DailyWeather;
+import com.castle.data.model.HourlyWeather;
 import com.castle.data.repositories.IDataRepository;
 import com.castle.weatherclient.IWeatherClient;
-import com.castle.weatherupdater.mappers.HourlyWeatherElementMapper;
 import com.castle.weatherupdater.mappers.ICatalogMappers;
 import com.castle.weatherupdater.repeater.abstractions.IUpdateWeather;
 import org.springframework.stereotype.Component;
@@ -23,7 +24,8 @@ public final class WeatherUpdater implements IUpdateWeather {
 
     @Override
     public void updateCurrentWeather() {
-        var weatherDto = weatherClient.getCurrentWeather();
+        var weatherDto = weatherClient
+                .getCurrentWeather();
 
         var weatherDescription = catalogMapper
                 .getWeatherDescriptionMapper()
@@ -49,9 +51,7 @@ public final class WeatherUpdater implements IUpdateWeather {
         var dailyWeatherDto = weatherClient
                 .getDailyWeather();
 
-        var dailyWeather = catalogMapper
-                .getDailyWeatherMapper()
-                        .map(dailyWeatherDto);
+        var dailyWeather = new DailyWeather();
 
         dataRepository
                 .getDailyWeatherRepository()
@@ -86,9 +86,7 @@ public final class WeatherUpdater implements IUpdateWeather {
     public void updateHourlyWeather() {
         var hourlyWeatherDto = weatherClient.getHourlyWeather();
 
-        var hourlyWeather = catalogMapper
-                .getHourlyWeatherMapper()
-                .map(hourlyWeatherDto);
+        var hourlyWeather = new HourlyWeather();
 
         dataRepository
                 .getHourlyWeatherRepository()

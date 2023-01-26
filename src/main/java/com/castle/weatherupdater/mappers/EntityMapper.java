@@ -10,9 +10,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @RequiredArgsConstructor
 public class EntityMapper implements ICatalogMappers {
-    private final IMapEntities<DailyWeatherDto, DailyWeather> dailyWeatherMapper;
     private final IMapEntities<DailyWeatherElementDto, DailyWeatherElement> dailyWeatherElementMapper;
-    private final IMapEntities<HourlyWeatherDto, HourlyWeather> hourlyWeatherMapper;
     private final IMapEntities<HourlyWeatherElementDto, HourlyWeatherElement> hourlyWeatherElementMapper;
     private final IMapEntities<WeatherDto, Weather> weatherMapper;
     private final IMapEntities<WeatherDescriptionDto, WeatherDescription> weatherDescriptionMapper;
