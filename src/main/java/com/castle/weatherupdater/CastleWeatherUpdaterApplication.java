@@ -29,7 +29,7 @@ public class CastleWeatherUpdaterApplication implements CommandLineRunner {
         Repeater updateHourlyWeatherRepeater = new Repeater(Duration.ofSeconds(10), LocalDateTime.now());
 
         Task updateCurrentWeatherTask = new Task(weatherUpdater::updateCurrentWeather);
-        Task updateDailyWeatherTask = new Task(weatherUpdater::updateCurrentWeather);
+        Task updateDailyWeatherTask = new Task(weatherUpdater::updateDailyWeather);
         Task updateHourlyWeatherTask = new Task(weatherUpdater::updateHourlyWeather);
 
         RepeaterThread updateCurrentWeatherThread = new RepeaterThread(updateCurrentWeatherRepeater);
